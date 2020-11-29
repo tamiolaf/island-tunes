@@ -148,29 +148,87 @@
                 }
             }).then(() => {
               const image0 = document.getElementById('image0');
-              console.log(image0.src)
              // fetch(image0.src).then(res => console.log(res.body));
               let img = new Image();
               img.src = image0.src; 
               img.crossOrigin = "Anonymous"
 
              
-              console.log(img.height)
               let canvas = document.getElementById("canvas");
               img.onload = function() {
-                canvas.width  = img.width;
-                canvas.height = img.height;
+               //image widthxheight is 300 by 300px but using 288px
+                canvas.width  = 288;//img.width;
+                canvas.height = 288;//img.height;
                 ctx.drawImage(img, 0, 0);
+                
                 let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 let data = imageData.data;
-                for (var i = 0; i < data.length; i += 4) {
+                /*for (var i = 0; i < data.length; i += 4) {
                   var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
                   data[i]     = avg; // red
                   data[i + 1] = avg; // green
                   data[i + 2] = avg; // blue
-                }
-                ctx.putImageData(imageData, 0, 0);
+                }*/
+             
+              //  for (let i = 0; i < data.length; i += 4) {
+                  //9x9 pixels = 36 by 36 array elements
+            /*      for (let i=0; i<data.length; i=+4) {
+                    let j=0;
+                 //   for (let j=0; j<i+(1152*9); j+=1152) {
+                      data[i] = 0;
+                      data[i+1] = 0;
+                      data[i+2] = 0;
+                   // }
+                  }
+                  /*
+                  if (i<36) {
+                    data[i] = 0;
+                    data[i+1] = 0;
+                    data[i+2] = 0;
+                  }
 
+                  /*if (i%1152 == 0){
+
+                    console.log('hit')
+                    data[i] = 0;
+                    data[i+1] = 0;
+                    data[i+2] = 0;
+                  }*/
+                
+               //  }
+               let i=0;
+               do  {
+                let redSum = 0;
+                let greenSum = 0;
+                let blueSum = 0;
+                //collect color data 
+                for (let j=i; j<i+36; j+=4) {
+                 //1152 is 288 *4. 288 is the width of the image and the array has 4 items per pixel
+                 for (let k=j; k<i+(1152*9);k+=1152) {
+                  redSum += data[k];
+                  greenSum += data[k+1];
+                  blueSum += data[k+2];
+                 }
+               }
+
+              //place color data
+              for (let l=i; l<i+36; l+=4) {
+                 //1152 is 288 *4. 288 is the width of the image and the array has 4 items per pixel
+                 for (let m=l; m<i+(1152*9);m+=1152) {
+                  data[m] = Math.round(redSum/81);
+                  data[m+1] = Math.round(greenSum/81);
+                  data[m+2] = Math.round(blueSum/81);
+                 }
+               }
+
+              i+=36;
+              if (i%(1152) == 0 ) {
+                i+= (1152*8)
+              }
+
+              } while (i<data.length)
+                console.log(imageData);
+                ctx.putImageData(imageData, 0, 0);
               }
 
           
