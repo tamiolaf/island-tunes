@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Spotify Accounts Authentication Examples
 
 This project contains basic demos showing the different OAuth 2.0 flows for [authenticating against the Spotify Web API](https://developer.spotify.com/web-api/authorization-guide/).
@@ -34,7 +33,6 @@ In order to run the different examples, open the folder with the name of the flo
     $ node app.js
 
 Then, open `http://localhost:8888` in a browser.
-=======
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/tamiolaf/island-tunes/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
@@ -72,4 +70,3 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
->>>>>>> b182aa535423accbb37885deb3f25130c0540437
